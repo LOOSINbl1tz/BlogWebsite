@@ -1,5 +1,11 @@
 # BlogWebsite
 
+<h1>Setup</h1>
+<ul>
+  <li>First make virtual enviroment and install libs in requirements.txt</li>
+  <li>Then make a db using psql named <b>blogdb</b> and a user named <b>blogger</b></li>
+</ul>
+
 API calls:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;  /auth/register/      <----- this api is accessible by anyone.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;  /auth/login/         <----- this is also accessible by anyone.<br>
