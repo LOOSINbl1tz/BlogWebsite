@@ -1,24 +1,100 @@
-import React from "react";
-import { Form } from "react-bootstrap";
-
+import React, { useState } from "react";
+import { Form, Button, Container, Card } from "react-bootstrap";
 function Register() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(username);
+    console.log(email);
+    console.log(password);
+    console.log(confirmPassword);
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setError("");
+  };
   return (
-    <Form>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="name@example.com" />
-      </Form.Group>
-      <Form.Label htmlFor="inputPassword5">Password</Form.Label>
-      <Form.Control
-        type="password"
-        id="inputPassword5"
-        aria-describedby="passwordHelpBlock"
-      />
-      <Form.Text id="passwordHelpBlock" muted>
-        Your password must be 8-20 characters long, contain letters and numbers,
-        and must not contain spaces, special characters, or emoji.
-      </Form.Text>
-    </Form>
+    <Card border="primary " style={{ width: "50%" }} className="mx-auto">
+      <Card.Header>
+        <h1>Register</h1>
+      </Card.Header>
+      <Card.Body>
+        <Form onSubmit={handleSubmit}>
+          {error && <div className="text-danger">{error}</div>}
+          <Form.Group controlId="formUsername">
+            <Card.Title>
+              <Form.Label>Username</Form.Label>
+            </Card.Title>
+            <Card.Text>
+              <Form.Control
+                type="text"
+                placeholder="Enter username"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+              />
+            </Card.Text>
+          </Form.Group>
+
+          <Form.Group controlId="formEmail">
+            <Card.Title>
+              {" "}
+              <Form.Label>Email</Form.Label>
+            </Card.Title>
+            <Card.Text>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </Card.Text>
+          </Form.Group>
+
+          <Form.Group controlId="formPassword">
+            <Card.Title>
+              {" "}
+              <Form.Label>Password</Form.Label>
+            </Card.Title>
+            <Form.Control
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formConfirmPassword">
+            <Card.Title>
+              {" "}
+              <Form.Label>Confirm Password</Form.Label>
+            </Card.Title>
+            <Form.Control
+              type="password"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+            />
+          </Form.Group>
+
+          <Card.Footer>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Card.Footer>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 }
 

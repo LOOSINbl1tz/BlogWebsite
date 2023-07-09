@@ -5,13 +5,14 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import Register from "./screens/Register";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <div>
       <Header />
       <main className="py-3">
-        <Container className="w-100 p-3">
+        <Container>
           <Register />
         </Container>
       </main>
