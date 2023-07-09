@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'rest_framework_simplejwt',
     'authenticate',
-    'rest_framework.authtoken', # Add this line
-    'rest_auth',                # Add this line
+    'rest_framework.authtoken', 
+    'rest_auth',                
+    'blogs',
 ]
 
 MIDDLEWARE = [

@@ -11,7 +11,6 @@ router.register('register',UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    # path('jwt',include('rest_auth.urls')),
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
