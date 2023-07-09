@@ -12,6 +12,7 @@ API calls:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;  /auth/login/         &emsp;&emsp;&nbsp;<----- this is also accessible by anyone.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;  /blog/save/          &emsp;&emsp;&nbsp;&nbsp;<----- only logged in will be able to access this api and perm is set to POST.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;  /blog/getblog/       &emsp;<----- Same with this and default permission is set to GET and DELETE.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;  /login/refresh/  &emsp;<----- To refresh JWT token
 <br><br>
 Now by default SessionAuthentication is disabled so to access these API <b><h2>PostMan is necessary</h2></b>
 
@@ -28,5 +29,16 @@ Now by default SessionAuthentication is disabled so to access these API <b><h2>P
 <ul>
   <li>The token returned by JWT consists of user_id hyperlink and passoword and this hyperlink is used to save blogs which should be maintained by frontend.</li>
   <li>The blog saving API uses author_id which is linked to user_id in other words the hyperlink for user_id is equivalent to author_id. Probably in future I will add exception handler to return some json message if wrong data is provided.</li>
-  
+</ul>
+
+<h2>Things to add</h2>
+<ul>
+  <li>Proper exception handler.</li>
+  <li>Roles making easier to handle multiple users.</li>
+  <li>JWT token need to be refreshed.</li>
+</ul>
+
+<h2>For Front-End</h2>
+<ul>
+  <li>JWT token needs to be stored in cookies and after some time refresh call should be done to refresh JWT token</li>
 </ul>
