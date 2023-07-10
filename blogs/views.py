@@ -1,5 +1,5 @@
 from rest_framework import viewsets,status 
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from .serializer import BlogSaveSerializer
 from .models import BlogSave
 
@@ -17,5 +17,5 @@ class BlogGetViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return BlogSave.objects.filter(author=user)
+        return BlogSave.objects.filter(author=user.id)
     
