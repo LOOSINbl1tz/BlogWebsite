@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+
 import { Form, Button, Container, Card } from "react-bootstrap";
 function Register() {
   const [username, setUsername] = useState("");
@@ -9,15 +11,35 @@ function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(username);
-    console.log(email);
-    console.log(password);
-    console.log(confirmPassword);
+    let formData = new FormData();
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password);
+
+    axios({
+      // Endpoint to send files
+      url: "http://localhost:8000/auth/register/",
+      method: "POST",
+      headers: {},
+
+      // Attaching the form data
+      data: formData,
+    })
+      .then((res) => {
+        console.log("res.data.username");
+      })
+
+      // Catch errors if any
+      .catch((err) => {
+        setError(err.response.data.username);
+        return;
+      });
+
     setUsername("");
     setEmail("");
     setPassword("");
