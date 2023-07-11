@@ -42,3 +42,9 @@ Now by default SessionAuthentication is disabled so to access these API <b><h2>P
 <ul>
   <li>JWT token needs to be stored in cookies and after some time refresh call should be done to refresh JWT token</li>
 </ul>
+
+<h1>Update!!!!!!!!</h1>
+<ul>
+  <li>Added pytest support.</li>
+  <li>Not using django test module because it does not follow much of python syntax.</li>
+</ul>
