@@ -82,16 +82,16 @@ WSGI_APPLICATION = 'blogwebsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+import json
+# data_settings = json.loads("config.json")    
+# print(data_settings)
+data = None
+with open("blogwebsite/config.json",'r') as file:
+    data = json.load(file)
+
 DATABASES = {
-    
-        'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "default":data['default']
     }
-    
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
