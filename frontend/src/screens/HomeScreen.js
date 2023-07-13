@@ -1,7 +1,7 @@
 import React from "react";
 import blog from "../blog";
 import Blogs from "../components/Blogs";
-import { Row, Col } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 function HomeScreen() {
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Form, Button, Card } from "react-bootstrap";
 
-import { Form, Button, Container, Card } from "react-bootstrap";
 function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
