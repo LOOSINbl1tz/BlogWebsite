@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import Register from "./screens/Register";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import {
   BrowserRouter as Router,
   Route,
@@ -14,6 +15,7 @@ import {
   useParams,
 } from "react-router-dom";
 import Counter from "./features/counter/Counter";
+import BlogPost from "./screens/BlogPost";
 import Blog from "./screens/Blog";
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
             <Route path="/login" element={<Login />} exact />
             <Route path="/blog/:id" element={<Blog />} />
             <Route path="/counter" element={<Counter />} />
+            <Route path="/blogpost" element={<BlogPost />} />
           </Routes>
         </Container>
       </main>
