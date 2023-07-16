@@ -14,6 +14,7 @@ API calls:<br>
         <th>API Endpoint</th>
         <th>Accessibility</th>
         <th>Permission</th>
+        <th>Returns</th>
       </tr>
     </thead>
     <tbody>
@@ -21,31 +22,37 @@ API calls:<br>
         <td>/auth/register/</td>
         <td>Accessible by anyone</td>
         <td>GET</td>
+        <td>Status Code 200</td>
       </tr>
       <tr>
         <td>/auth/login/</td>
         <td>Accessible by anyone</td>
         <td>POST</td>
+        <td>JWT token consisting of access token and refresh token</td>
       </tr>
       <tr>
         <td>/blog/save/</td>
         <td>Only logged-in users</td>
         <td>POST</td>
+        <td>Data of the blog posted and Author ID</td>
       </tr>
       <tr>
         <td>/blog/getblog/</td>
         <td>Only logged-in users</td>
         <td>GET, DELETE</td>
+        <td>All the blogs posted by the logged-in User</td>
       </tr>
       <tr>
         <td>/login/refresh/</td>
         <td>Only logged-in users</td>
         <td>GET</td>
+        <td>New JWT token</td>
       </tr>
       <tr>
         <td>/auth/user/</td>
         <td>Only logged-in users</td>
         <td>POST</td>
+        <td>User ID</td>
       </tr>
     </tbody>
   </table>
