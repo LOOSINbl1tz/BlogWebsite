@@ -15,6 +15,7 @@ API calls:<br>
         <th>Accessibility</th>
         <th>Permission</th>
         <th>Returns</th>
+        <th>Input</th>
       </tr>
     </thead>
     <tbody>
@@ -23,36 +24,42 @@ API calls:<br>
         <td>Accessible by anyone</td>
         <td>GET</td>
         <td>Status Code 200</td>
+        <td align="Center">Username, Email, Password, First Name, Last Name</td>
       </tr>
       <tr>
         <td>/auth/login/</td>
         <td>Accessible by anyone</td>
         <td>POST</td>
         <td>JWT token consisting of access token and refresh token</td>
+        <td align="Center">Username, Password</td>
       </tr>
       <tr>
         <td>/blog/save/</td>
         <td>Only logged-in users</td>
         <td>POST</td>
         <td>Data of the blog posted and Author ID</td>
+        <td align="Center">Title, Author ID, Content</td>
       </tr>
       <tr>
         <td>/blog/getblog/</td>
         <td>Only logged-in users</td>
         <td>GET, DELETE</td>
         <td>All the blogs posted by the logged-in User</td>
+        <td align="Center">-</td>
       </tr>
       <tr>
         <td>/login/refresh/</td>
         <td>Only logged-in users</td>
         <td>GET</td>
         <td>New JWT token</td>
+        <td align="Center">-</td>
       </tr>
       <tr>
         <td>/auth/user/</td>
         <td>Only logged-in users</td>
         <td>POST</td>
         <td>User ID</td>
+        <td>JWT token as header</td>
       </tr>
     </tbody>
   </table>
