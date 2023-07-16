@@ -11,6 +11,9 @@ class NoHeaderProvided(APIException):
         default_detail = 'No token is provided in the header or the header is missing.'
         default_code = 'no_header_provided'
 
+
+
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer

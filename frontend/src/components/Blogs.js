@@ -8,12 +8,17 @@ function Blogs({ blog }) {
       <Card.Body>
         <Card.Title>
           <h2>
-            <Link to={`/blog/${blog.id}`}>{blog.title}</Link>
+            <Link to={`/blog/${blog.id}`} style={{ color: "black" }}>
+              {blog.title}
+            </Link>
           </h2>
         </Card.Title>
 
         <Card.Subtitle className="mb-2 text-muted">
-          By <Link to={`/user/${blog.aid}`}>{blog.author}</Link>
+          By{" "}
+          <Link to={`/user/${blog.aid}`} style={{ color: "gray" }}>
+            {blog.author}
+          </Link>
         </Card.Subtitle>
         <Card.Text>{blog.body}</Card.Text>
       </Card.Body>

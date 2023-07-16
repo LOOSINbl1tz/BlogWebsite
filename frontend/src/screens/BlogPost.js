@@ -1,10 +1,36 @@
-import Editor from "../components/EditorWithUseQuill";
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import { useQuill } from "react-quilljs";
 import BlotFormatter from "quill-blot-formatter";
 
+import { useEffect } from "react";
+import "quill/dist/quill.snow.css";
+
+import "../components/style.css";
+
+const Editor = () => {
+  const { quill, quillRef, Quill } = useQuill({
+    modules: { blotFormatter: {} },
+  });
+
+  if (Quill && !quill) {
+    // const BlotFormatter = require('quill-blot-formatter');
+    Quill.register("modules/blotFormatter", BlotFormatter);
+  }
+
+  useEffect(() => {
+    if (quill) {
+      quill.on("text-change", (delta, oldContents) => {
+        console.log("Text change!");
+        console.log(delta);
+
+        let currrentContents = quill.getContents();
+        console.log(currrentContents.diff(oldContents));
+      });
+    }
+  }, [quill, Quill]);
+};
 function BlogPost() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -20,8 +46,7 @@ function BlogPost() {
     event.preventDefault();
     let formData = new FormData();
     formData.append("title", title);
-    formData.append("body", body);
-    console.log(quill.getText());
+    formData.append("body", quill.getContents());
   };
 
   const handleTitleChange = (e) => {
@@ -60,7 +85,9 @@ function BlogPost() {
             onChange={handleTitleChange}
           />
         </Form.Group>
-        <Editor placeholder={"Write Here..."} />
+        <div>
+          <div ref={quillRef} />
+        </div>
 
         <Button
           variant="primary"

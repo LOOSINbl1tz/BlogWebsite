@@ -7,6 +7,8 @@ import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import Register from "./screens/Register";
 import "bootstrap/dist/css/bootstrap.min.css";
+import PostLists from "./features/Posts/PostLists";
+import AddPostForm from "./features/Posts/AddPostForm";
 
 import {
   BrowserRouter as Router,
@@ -31,6 +33,8 @@ function App() {
             <Route path="/blog/:id" element={<Blog />} />
             <Route path="/counter" element={<Counter />} />
             <Route path="/blogpost" element={<BlogPost />} />
+            <Route path="/postlist" element={<PostLists />} />
+            <Route path="/postadd" element={<AddPostForm />} />
           </Routes>
         </Container>
       </main>
