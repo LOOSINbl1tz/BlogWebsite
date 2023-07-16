@@ -96,6 +96,5 @@ Now by default SessionAuthentication is disabled so to access these API <b><h2>P
 
 <h1>Update!!!!!!!!</h1>
 <ul>
-  <li>Added pytest support.</li>
-  <li>Not using django test module because it does not follow much of python syntax.</li>
+  <li>Change /auth/user/ endpoint and will return the data only for the provided JWT token.</li>
 </ul>
