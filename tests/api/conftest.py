@@ -30,3 +30,6 @@ def keep_auth(user_create,client):
     refresh = RefreshToken.for_user(user_create)
     client.credentials(HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}')
     return client
+# @pytest.fixture
+# def get_user(keep_auth):
+    

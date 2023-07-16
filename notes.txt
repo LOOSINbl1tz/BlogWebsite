@@ -69,4 +69,9 @@ Some important commands:
     - django-admin startproject <project_name>
     - python manage.py startapp <app_name>
     - python manage.py runserver
-    - python manage.py makemigrations and after that run python manage.py migrate 
+    - python manage.py makemigrations and after that run python manage.py migrate
+---------------------------------------------------------------------------------------------------------------------
+
+TODO:
+	- JWT verfication
+	- JWT decode
