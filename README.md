@@ -7,7 +7,7 @@
   <li>Now runserver and make those api calls using POSTMAN</li>
 </ul>
 
-API calls:<br>
+API calls: http://localhost:8000/<br>
 <table>
     <thead>
       <tr>
