@@ -59,7 +59,7 @@ API calls:<br>
         <td>Only logged-in users</td>
         <td>POST</td>
         <td>User ID</td>
-        <td>JWT token as header</td>
+        <td align="Center">JWT token as header</td>
       </tr>
     </tbody>
   </table>
