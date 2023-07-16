@@ -8,12 +8,49 @@
 </ul>
 
 API calls:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;  /auth/register/      &emsp;<----- this api is accessible by anyone.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;  /auth/login/         &emsp;&emsp;&nbsp;<----- this is also accessible by anyone.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;  /blog/save/          &emsp;&emsp;&nbsp;&nbsp;<----- only logged in will be able to access this api and perm is set to POST.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;  /blog/getblog/       &emsp;<----- Same with this and default permission is set to GET and DELETE.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;  /login/refresh/  &emsp;<----- To refresh JWT token
-<br><br>
+<table>
+    <thead>
+      <tr>
+        <th>API Endpoint</th>
+        <th>Accessibility</th>
+        <th>Permission</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>/auth/register/</td>
+        <td>Accessible by anyone</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>/auth/login/</td>
+        <td>Accessible by anyone</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>/blog/save/</td>
+        <td>Only logged-in users</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>/blog/getblog/</td>
+        <td>Only logged-in users</td>
+        <td>GET, DELETE</td>
+      </tr>
+      <tr>
+        <td>/login/refresh/</td>
+        <td>Only logged-in users</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>/auth/user/</td>
+        <td>Only logged-in users</td>
+        <td>POST</td>
+      </tr>
+    </tbody>
+  </table>
+
+<br>
 Now by default SessionAuthentication is disabled so to access these API <b><h2>PostMan is necessary</h2></b>
 
 <br>
