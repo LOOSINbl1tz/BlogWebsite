@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenObtainSerializer
 
@@ -14,12 +14,18 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # ...
 
         return token
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        serializer = UserSerializerWithToken(self.user).data
+        for k, v in serializer.items():
+            data[k] = v
+        return data
     
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields= ('username','first_name','last_name','email','id')
+        fields= ('username','first_name','last_name','email','id', 'password')
 
     def create(self, validated_data):
         password = validated_data.pop('password')
@@ -30,11 +36,26 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserGetSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = User
         # fields = ('id','username','first_name','email')
-        fields = ('id',)
+        fields = ('id', 'name')
 
+    def get_name(self, user):
+        name = user.first_name
+        if name =='':
+            name = user.username
+        return name
+    
+class UserSerializerWithToken(UserGetSerializer):
+    token = serializers.SerializerMethodField(read_only=True)
+    class Meta:
+        model = User
+        fields = ('id', 'name', 'token')
+    def get_token(self, user):
+        token = RefreshToken.for_user(user)
+        return str(token.access_token)
 
 
     
