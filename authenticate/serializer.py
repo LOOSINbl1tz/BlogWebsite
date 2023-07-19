@@ -19,7 +19,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields= ('username','first_name','last_name','email','password')
+        fields= ('username','first_name','last_name','email','id')
 
     def create(self, validated_data):
         password = validated_data.pop('password')
