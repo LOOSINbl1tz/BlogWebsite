@@ -4,25 +4,27 @@ import { Link } from "react-router-dom";
 
 function Blogs({ blog }) {
   return (
-    <Card style={{ width: "100%" }}>
-      <Card.Body>
-        <Card.Title>
-          <h2>
-            <Link to={`/blog/${blog.id}`} style={{ color: "black" }}>
-              {blog.title}
-            </Link>
-          </h2>
-        </Card.Title>
+    <div>
+      <Card style={{ width: "100%" }}>
+        <Card.Body>
+          <Card.Title>
+            <h2>
+              <Link to={`/blog/${blog.id}`} style={{ color: "black" }}>
+                {blog.title}
+              </Link>
+            </h2>
+          </Card.Title>
 
-        <Card.Subtitle className="mb-2 text-muted">
-          By{" "}
-          <Link to={`/user/${blog.aid}`} style={{ color: "gray" }}>
-            {blog.author}
-          </Link>
-        </Card.Subtitle>
-        <Card.Text>{blog.body}</Card.Text>
-      </Card.Body>
-    </Card>
+          <Card.Subtitle className="mb-2 text-muted">
+            By{" "}
+            <Link to={`/user/${blog.aid}`} style={{ color: "gray" }}>
+              {blog.author}
+            </Link>
+          </Card.Subtitle>
+          <Card.Text>{blog.body}</Card.Text>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 

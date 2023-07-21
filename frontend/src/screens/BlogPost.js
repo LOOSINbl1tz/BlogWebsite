@@ -6,6 +6,7 @@ import BlotFormatter from "quill-blot-formatter";
 
 import { useEffect } from "react";
 import "quill/dist/quill.snow.css";
+import { useSelector } from "react-redux";
 
 import "../components/style.css";
 
@@ -34,6 +35,8 @@ const Editor = () => {
 function BlogPost() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const authToken = useSelector((state) => state.auth.token);
+
   const { quill, quillRef, Quill } = useQuill({
     modules: { blotFormatter: {} },
   });
@@ -46,19 +49,12 @@ function BlogPost() {
     event.preventDefault();
     let formData = new FormData();
     formData.append("title", title);
-    formData.append("body", quill.getContents());
-  };
-
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-
-  /*
+    formData.append("body", quill.getText());
     axios({
       // Endpoint to send files
-      url: "http://localhost:8000/auth/login/",
+      url: "http://localhost:8000/blog/save/",
       method: "POST",
-      headers: {},
+      headers: { Authorization: `Bearer ${authToken}` },
 
       // Attaching the form data
       data: formData,
@@ -69,10 +65,18 @@ function BlogPost() {
 
       // Catch errors if any
       .catch((err) => {
-        setError(err.response.data.detail);
-        return;
+        console.log(err.response);
       });
-  };*/
+  };
+  // console.log(quill.getText());
+  // console.log(quill.getContents());
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  /*
+   */
 
   return (
     <div>

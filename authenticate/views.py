@@ -24,7 +24,7 @@ class UserViewSet(viewsets.ModelViewSet):
 # Pass the JWT token as header and in return user data will be provided mainly user_id
 class UserGetViewSet(viewsets.ModelViewSet):
     serializer_class = UserGetSerializer
-    http_method_names = ['post', 'get']
+    http_method_names = ['get']
     permission_classes = [AllowAny]
     queryset = User.objects.all()
 
@@ -38,4 +38,6 @@ class UserGetViewSet(viewsets.ModelViewSet):
             raise NoHeaderProvided()
         
         return User.objects.filter(id=user_id)
+    
+
     

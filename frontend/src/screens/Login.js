@@ -1,42 +1,25 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Form, Button, Card } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { loginStart } from "../features/User/loginSlice";
+import { Navigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
+  const error = useSelector((state) => state.login.error);
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.login.isLoading);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const handleSubmit = (event) => {
     event.preventDefault();
-    let formData = new FormData();
-
-    formData.append("username", username);
-    formData.append("password", password);
-
-    axios({
-      // Endpoint to send files
-      url: "http://localhost:8000/auth/login/",
-      method: "POST",
-      headers: {},
-
-      // Attaching the form data
-      data: formData,
-    })
-      .then((res) => {
-        console.log("res.data.detail");
-      })
-
-      // Catch errors if any
-      .catch((err) => {
-        setError(err.response.data.detail);
-        return;
-      });
-
+    dispatch(loginStart({ username, password }));
     setUsername("");
     setPassword("");
-    setError("");
   };
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
   return (
     <Card border="primary " style={{ width: "50%" }} className="mx-auto">
       <Card.Header>
@@ -44,7 +27,7 @@ function Login() {
       </Card.Header>
       <Card.Body>
         <Form onSubmit={handleSubmit}>
-          {error && <div className="text-danger">{error}</div>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <Form.Group controlId="formUsername">
             <Card.Title>
               <Form.Label>Username</Form.Label>
@@ -73,8 +56,8 @@ function Login() {
           </Form.Group>
 
           <Card.Footer>
-            <Button variant="primary" type="submit">
-              Submit
+            <Button variant="primary" type="submit" disabled={isLoading}>
+              {isLoading ? "Logging in..." : "Login"}
             </Button>
           </Card.Footer>
         </Form>
