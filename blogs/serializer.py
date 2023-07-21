@@ -11,7 +11,6 @@ class BlogSaveSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context["request"].user
         blog = BlogSave.objects.create(**validated_data, author=user)
-
         return blog
     
 
@@ -25,3 +24,10 @@ class BlogGetSerializer(serializers.ModelSerializer):
         name = blog.author.username
         return name
 
+
+
+class DeleteOwnBlogSerializer(serializers.ModelSerializer):
+    # delete_user_blog = serializers.SerializerMethodField(read_only=True)
+    class Meta:
+        model = BlogSave
+        fields = ('id')
