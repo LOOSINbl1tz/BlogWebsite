@@ -37,23 +37,18 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserGetSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = User
         # fields = ('id','username','first_name','email')
-        fields = ('id', 'name')
+        fields = ('id', 'username')
 
-    def get_name(self, user):
-        name = user.first_name
-        if name =='':
-            name = user.username
-        return name
+
     
 class UserSerializerWithToken(UserGetSerializer):
     token = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = User
-        fields = ('id', 'name', 'token')
+        fields = ('id', 'username', 'token')
     def get_token(self, user):
         token = RefreshToken.for_user(user)
         return str(token.access_token)

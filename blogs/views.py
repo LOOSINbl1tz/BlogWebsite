@@ -43,10 +43,7 @@ class BlogGetUserViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs): # Change is here <<
         serializer = self.get_serializer(self.get_queryset(), many=True)
         return Response(data=serializer.data)
-   # @action(methods=['get'], detail=True, permission_classes=[IsAuthenticated], url_path='get-blogs', url_name='get-blogs')
-   # def get_blogs(self, request, pk=None):
-   #     user_id = int(self.kwargs.get('pk', self.request.user.id))
-     #   return BlogSave.objects.filter(author_id=user_id)
+
 
  #
     

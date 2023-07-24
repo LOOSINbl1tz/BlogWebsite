@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Header() {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // Get authentication status from Redux store
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -28,6 +28,11 @@ function Header() {
             {isAuthenticated ? (
               <Nav.Link as={Link} to="/blogpost">
                 Post
+              </Nav.Link>
+            ) : null}
+            {isAuthenticated ? (
+              <Nav.Link as={Link} to="/user">
+                My Blogs
               </Nav.Link>
             ) : null}
           </Nav>

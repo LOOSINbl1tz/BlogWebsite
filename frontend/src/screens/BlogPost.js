@@ -3,6 +3,7 @@ import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import { useQuill } from "react-quilljs";
 import BlotFormatter from "quill-blot-formatter";
+import { useNavigate } from "react-router-dom";
 
 import { useEffect } from "react";
 import "quill/dist/quill.snow.css";
@@ -36,6 +37,7 @@ function BlogPost() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const authToken = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
 
   const { quill, quillRef, Quill } = useQuill({
     modules: { blotFormatter: {} },
@@ -60,7 +62,7 @@ function BlogPost() {
       data: formData,
     })
       .then((res) => {
-        console.log("res.data.detail");
+        navigate("/");
       })
 
       // Catch errors if any

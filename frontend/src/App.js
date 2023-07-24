@@ -18,6 +18,8 @@ import {
 } from "react-router-dom";
 import BlogPost from "./screens/BlogPost";
 import Blog from "./screens/Blog";
+import { addListener } from "@reduxjs/toolkit";
+import MyPosts from "./screens/MyPosts";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +50,7 @@ function App() {
             <Route path="/blog/:id" element={<Blog />} />
             <Route path="/blogpost" element={<BlogPost />} />
             <Route path="/user/:id" element={<UserPosts />} />
+            <Route path="/user" element={<MyPosts />} />
           </Routes>
         </Container>
       </main>
