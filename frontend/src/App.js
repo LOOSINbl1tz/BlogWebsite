@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import "./App.css";
 import { Container } from "react-bootstrap";
 import Header from "./components/Header";
@@ -7,20 +8,34 @@ import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import Register from "./screens/Register";
 import "bootstrap/dist/css/bootstrap.min.css";
-import PostLists from "./features/Posts/PostLists";
-import AddPostForm from "./features/Posts/AddPostForm";
-
+import { setToken } from "./features/User/authSlice";
+import UserPosts from "./screens/UserPosts";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   useParams,
 } from "react-router-dom";
-import Counter from "./features/counter/Counter";
 import BlogPost from "./screens/BlogPost";
 import Blog from "./screens/Blog";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Check for the presence of the JWT token in local storage
+    const jwtToken = localStorage.getItem("jwt");
+    const user = localStorage.getItem("user");
+    // If the JWT token exists and is valid (e.g., not expired), authenticate the user
+    if (jwtToken) {
+      // Dispatch an action to set the user as authenticated
+      dispatch(setToken([jwtToken, user]));
+      console.log("called");
+    }
+
+    // Optionally, you can also handle token expiration and other logic here.
+  });
+
   return (
     <Router>
       <Header />
@@ -31,10 +46,8 @@ function App() {
             <Route path="/register" element={<Register />} exact />
             <Route path="/login" element={<Login />} exact />
             <Route path="/blog/:id" element={<Blog />} />
-            <Route path="/counter" element={<Counter />} />
             <Route path="/blogpost" element={<BlogPost />} />
-            <Route path="/postlist" element={<PostLists />} />
-            <Route path="/postadd" element={<AddPostForm />} />
+            <Route path="/user/:id" element={<UserPosts />} />
           </Routes>
         </Container>
       </main>

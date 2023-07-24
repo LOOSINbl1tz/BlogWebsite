@@ -17,8 +17,8 @@ function Blogs({ blog }) {
 
           <Card.Subtitle className="mb-2 text-muted">
             By{" "}
-            <Link to={`/user/${blog.aid}`} style={{ color: "gray" }}>
-              {blog.author}
+            <Link to={`/user/${blog.author}`} style={{ color: "gray" }}>
+              {blog.author_name}
             </Link>
           </Card.Subtitle>
           <Card.Text>{blog.body}</Card.Text>

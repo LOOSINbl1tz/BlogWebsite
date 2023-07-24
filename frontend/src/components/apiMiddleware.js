@@ -18,7 +18,10 @@ const apiMiddleware = (store) => (next) => (action) => {
       .then((res) => {
         const token = res.data.access;
         const user = res.data.name;
-        console.log(token);
+        //  console.log(token);
+        localStorage.setItem("jwt", token);
+        localStorage.setItem("user", user);
+
         store.dispatch(setToken([token, user]));
         next(action);
       })

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import blog from "../blog";
 import Blogs from "../components/Blogs";
 import { Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+
 import axios from "axios";
 
-function HomeScreen() {
+function UserPosts() {
+  const id = useParams();
+  const pk = id.id;
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const authToken = useSelector((state) => state.auth.token);
 
@@ -15,7 +17,7 @@ function HomeScreen() {
   useEffect(() => {
     // Fetch the blogs when the component mounts
     axios({
-      url: "http://localhost:8000/blog/getblogs/",
+      url: `http://localhost:8000/blog/getblogs/${pk}`,
       method: "GET",
       headers: { Authorization: `Bearer ${authToken}` },
     })
@@ -24,7 +26,7 @@ function HomeScreen() {
         setBlogs(res.data);
       })
       .catch((err) => {
-        console.log(err.response);
+        return <Navigate to="/" />;
       });
   }, [authToken]); // Include authToken as a dependency to refetch data when the token changes
 
@@ -34,19 +36,24 @@ function HomeScreen() {
 
   return (
     <div className="w-100 p-3">
-      {blogs.map(
-        (
-          blog // Use the fetched blogs from the state
-        ) => (
+      {Array.isArray(blogs) ? (
+        blogs.map((blog) => (
           <Col key={blog.id} className="w-100 p-3">
             <article>
               <Blogs blog={blog} />
             </article>
           </Col>
-        )
+        ))
+      ) : (
+        // Render the Blogs component directly for a single blog object
+        <Col className="w-100 p-3">
+          <article>
+            <Blogs blog={blogs} />
+          </article>
+        </Col>
       )}
     </div>
   );
 }
 
-export default HomeScreen;
+export default UserPosts;

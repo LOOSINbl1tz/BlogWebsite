@@ -1,10 +1,12 @@
 from rest_framework import viewsets,status 
 from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser
-from .serializer import BlogSaveSerializer,DeleteOwnBlogSerializer
+from .serializer import BlogGetSerializer, BlogSaveSerializer,DeleteOwnBlogSerializer
 from .models import BlogSave
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
+from rest_framework.decorators import action
+
 
 class NoHeaderProvided(APIException):
         status_code = 400
@@ -24,20 +26,29 @@ class BlogSaveViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 class BlogGetViewSet(viewsets.ModelViewSet):
-    serializer_class = BlogSaveSerializer
+    serializer_class = BlogGetSerializer
     http_method_names = ['get']
     permission_classes = [IsAuthenticated]
     queryset = BlogSave.objects.all()
     
     
-class BlogGetOwnViewSet(viewsets.ModelViewSet):
-    serializer_class = BlogSaveSerializer
+class BlogGetUserViewSet(viewsets.ModelViewSet):
+    serializer_class = BlogGetSerializer
     http_method_names = ['get']
     permission_classes = [IsAuthenticated]
-
+    
     def get_queryset(self):
-        user = self.request.user
-        return BlogSave.objects.filter(author=user.id)
+        user_id = int(self.kwargs.get('pk', self.request.user.id))
+        return BlogSave.objects.filter(author_id=user_id)
+    def retrieve(self, request, *args, **kwargs): # Change is here <<
+        serializer = self.get_serializer(self.get_queryset(), many=True)
+        return Response(data=serializer.data)
+   # @action(methods=['get'], detail=True, permission_classes=[IsAuthenticated], url_path='get-blogs', url_name='get-blogs')
+   # def get_blogs(self, request, pk=None):
+   #     user_id = int(self.kwargs.get('pk', self.request.user.id))
+     #   return BlogSave.objects.filter(author_id=user_id)
+
+ #
     
 class BlogGetAdminViewSet(viewsets.ModelViewSet):
     serializer_class = BlogSaveSerializer
