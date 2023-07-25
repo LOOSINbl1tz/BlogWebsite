@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
 
 function Header() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -36,6 +37,7 @@ function Header() {
               </Nav.Link>
             ) : null}
           </Nav>
+          {isAuthenticated ? <LogoutButton /> : null}
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -2,35 +2,47 @@ import React, { useEffect, useState } from "react";
 import Blogs from "../components/Blogs";
 import { Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Pagination from "../components/Pagination";
 import axios from "axios";
 
 function HomeScreen() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const authToken = useSelector((state) => state.auth.token);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalBlogs, setTotalBlogs] = useState(0);
+  const navigate = useNavigate();
   const [blogs, setBlogs] = useState([]); // State to store the fetched blogs
-
+  const itemsPerPage = 5;
   useEffect(() => {
+    fetchBlogs();
+  }, [authToken, currentPage]);
+
+  const checkLogin = () => {};
+  const fetchBlogs = () => {
+    if (!isAuthenticated) {
+      navigate("/login");
+      return;
+    }
     // Fetch the blogs when the component mounts
     axios({
-      url: "http://localhost:8000/blog/getblogs/",
+      url: `http://localhost:8000/blog/getblogs/?page=${currentPage}`,
       method: "GET",
       headers: { Authorization: `Bearer ${authToken}` },
     })
       .then((res) => {
-        // Save the fetched blogs to the state
-        setBlogs(res.data);
+        setBlogs(res.data.results);
+        setTotalBlogs(res.data.count);
       })
       .catch((err) => {
         console.log(err.response);
       });
-  }, [authToken]); // Include authToken as a dependency to refetch data when the token changes
+  }; // Include authToken as a dependency to refetch data when the token changes
+  const totalPages = Math.ceil(totalBlogs / itemsPerPage);
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
-
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   return (
     <div className="w-100 p-3">
       {blogs.map(
@@ -44,6 +56,12 @@ function HomeScreen() {
           </Col>
         )
       )}
+
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }

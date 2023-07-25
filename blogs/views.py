@@ -28,7 +28,7 @@ class BlogGetViewSet(viewsets.ModelViewSet):
     serializer_class = BlogGetSerializer
     http_method_names = ['get']
     permission_classes = [IsAuthenticated]
-    queryset = BlogSave.objects.all()
+    queryset = BlogSave.objects.all().order_by('-date_time')
     pagination_class = BlogPagination
     
 class BlogGetUserViewSet(viewsets.ModelViewSet):
@@ -39,11 +39,16 @@ class BlogGetUserViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user_id = int(self.kwargs.get('pk', self.request.user.id))
-        return BlogSave.objects.filter(author_id=user_id)
+        return BlogSave.objects.filter(author_id=user_id).order_by('-date_time')
     
     def retrieve(self, request, *args, **kwargs): # Change is here <<
-        serializer = self.get_serializer(self.get_queryset(), many=True)
-        return Response(data=serializer.data)
+        queryset = self.get_queryset()
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
     
 class BlogGetAdminViewSet(viewsets.ModelViewSet):
     serializer_class = BlogSaveSerializer

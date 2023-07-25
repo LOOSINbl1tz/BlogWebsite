@@ -154,7 +154,7 @@ REST_FRAMEWORK = {
     # 'rest_framework.authentication.BasicAuthentication',
     'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-}
+    'DEFAULT_PAGINATION_CLASS': 'blogs.pagination.BlogPagination',}
 
 
 from datetime import timedelta

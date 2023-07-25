@@ -3,6 +3,7 @@ import Blogs from "../components/Blogs";
 import { Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
+import Pagination from "../components/Pagination";
 
 import axios from "axios";
 
@@ -13,28 +14,37 @@ function UserPosts() {
   const authToken = useSelector((state) => state.auth.token);
 
   const [blogs, setBlogs] = useState([]); // State to store the fetched blogs
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalBlogs, setTotalBlogs] = useState(0);
+  const itemsPerPage = 5;
   useEffect(() => {
-    // Fetch the blogs when the component mounts
+    fetchBlogs();
+  }, [authToken, currentPage, pk]);
+
+  const fetchBlogs = () => {
     axios({
-      url: `http://localhost:8000/blog/getuserblogs/${pk}`,
+      url: `http://localhost:8000/blog/getuserblogs/${pk}/?page=${currentPage}`,
       method: "GET",
       headers: { Authorization: `Bearer ${authToken}` },
     })
       .then((res) => {
-        // Save the fetched blogs to the state
-        setBlogs(res.data);
-        return <Navigate to="/" />;
+        setBlogs(res.data.results);
+        setTotalBlogs(res.data.count);
       })
       .catch((err) => {
         return <Navigate to="/" />;
       });
-  }, [authToken, pk]); // Include authToken as a dependency to refetch data when the token changes
+  }; // Include authToken as a dependency to refetch data when the token changes
 
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
+  const totalPages = Math.ceil(totalBlogs / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   return (
     <div className="w-100 p-3">
       {Array.isArray(blogs) ? (
@@ -53,6 +63,12 @@ function UserPosts() {
           </article>
         </Col>
       )}
+
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }
