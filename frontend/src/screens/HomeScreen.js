@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import blog from "../blog";
 import Blogs from "../components/Blogs";
 import { Col } from "react-bootstrap";
 import { useSelector } from "react-redux";

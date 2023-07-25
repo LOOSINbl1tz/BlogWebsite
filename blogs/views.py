@@ -31,7 +31,6 @@ class BlogGetViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = BlogSave.objects.all()
     
-    
 class BlogGetUserViewSet(viewsets.ModelViewSet):
     serializer_class = BlogGetSerializer
     http_method_names = ['get']
@@ -40,12 +39,10 @@ class BlogGetUserViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user_id = int(self.kwargs.get('pk', self.request.user.id))
         return BlogSave.objects.filter(author_id=user_id)
+    
     def retrieve(self, request, *args, **kwargs): # Change is here <<
         serializer = self.get_serializer(self.get_queryset(), many=True)
         return Response(data=serializer.data)
-
-
- #
     
 class BlogGetAdminViewSet(viewsets.ModelViewSet):
     serializer_class = BlogSaveSerializer
