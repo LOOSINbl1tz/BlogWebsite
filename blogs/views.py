@@ -27,7 +27,7 @@ class BlogSaveViewSet(viewsets.ModelViewSet):
 class BlogGetViewSet(viewsets.ModelViewSet):
     serializer_class = BlogGetSerializer
     http_method_names = ['get']
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     queryset = BlogSave.objects.all()
     pagination_class = BlogPagination
     
