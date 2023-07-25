@@ -78,20 +78,8 @@ Now by default SessionAuthentication is disabled so to access these API <b><h2>P
 
 <h2>Remember</h2>
 <ul>
-  <li>The token returned by JWT consists of user_id hyperlink and passoword and this hyperlink is used to save blogs which should be maintained by frontend.</li>
-  <li>The blog saving API uses author_id which is linked to user_id in other words the hyperlink for user_id is equivalent to author_id. Probably in future I will add exception handler to return some json message if wrong data is provided.</li>
-</ul>
-
-<h2>Things to add</h2>
-<ul>
-  <li>Proper exception handler.</li>
-  <li>Roles making easier to handle multiple users.</li>
-  <li>JWT token need to be refreshed.</li>
-</ul>
-
-<h2>For Front-End</h2>
-<ul>
-  <li>JWT token needs to be stored in cookies and after some time refresh call should be done to refresh JWT token</li>
+  <li>The token returned by JWT consists of user_id and password and this id is used to save blogs which should be maintained by frontend.</li>
+  <li>The blog saving API uses author_id which is mapped to user_id in other words the value for user_id is equivalent to author_id.</li>
 </ul>
 
 <h1>Update!!!!!!!!</h1>
