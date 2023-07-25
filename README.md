@@ -96,5 +96,5 @@ Now by default SessionAuthentication is disabled so to access these API <b><h2>P
 
 <h1>Update!!!!!!!!</h1>
 <ul>
-  <li>Change /auth/user/ endpoint and will return the data only for the provided JWT token.</li>
+  <li>Added paginatino and logout feature.</li>
 </ul>
