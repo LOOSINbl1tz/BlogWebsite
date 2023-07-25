@@ -5,8 +5,7 @@ from .models import BlogSave
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
-from rest_framework.decorators import action
-
+from .pagination import BlogPagination
 
 class NoHeaderProvided(APIException):
         status_code = 400
@@ -28,14 +27,16 @@ class BlogSaveViewSet(viewsets.ModelViewSet):
 class BlogGetViewSet(viewsets.ModelViewSet):
     serializer_class = BlogGetSerializer
     http_method_names = ['get']
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = BlogSave.objects.all()
+    pagination_class = BlogPagination
     
 class BlogGetUserViewSet(viewsets.ModelViewSet):
     serializer_class = BlogGetSerializer
     http_method_names = ['get']
     permission_classes = [IsAuthenticated]
-    
+    pagination_class = BlogPagination
+
     def get_queryset(self):
         user_id = int(self.kwargs.get('pk', self.request.user.id))
         return BlogSave.objects.filter(author_id=user_id)
@@ -49,6 +50,7 @@ class BlogGetAdminViewSet(viewsets.ModelViewSet):
     http_method_names = ['get']
     permission_classes = [IsAdminUser]
     queryset =  BlogSave.objects.all()
+    pagination_class = BlogPagination
 
 class DeleteByUserViewSet(viewsets.ModelViewSet):
     serializer_class = DeleteOwnBlogSerializer
