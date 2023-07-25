@@ -96,5 +96,5 @@ Now by default SessionAuthentication is disabled so to access these API <b><h2>P
 
 <h1>Update!!!!!!!!</h1>
 <ul>
-  <li>Added paginatino and logout feature.</li>
+  <li>Added pagination and logout feature.</li>
 </ul>
