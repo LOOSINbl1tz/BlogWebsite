@@ -99,8 +99,6 @@ API calls: http://localhost:8000/<br>
   </table>
 
 <br>
-Now by default SessionAuthentication is disabled so to access these API <b><h2>PostMan is necessary</h2></b>
-
 <br>
 <h1>Everything should be given in JSON format</h1>
 <ul>
