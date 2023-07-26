@@ -13,7 +13,8 @@ function MyPosts() {
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalBlogs, setTotalBlogs] = useState(0);
-  const itemsPerPage = 5;
+  const [itemsPerPage, setitemsPerPage] = useState(1);
+
   useEffect(() => {
     fetchBlogs();
   }, [authToken, currentPage]);
@@ -27,6 +28,7 @@ function MyPosts() {
     })
       .then((res) => {
         // Save the fetched blogs to the state
+        setitemsPerPage(res.data.page_size);
         setBlogs(res.data.results);
         setTotalBlogs(res.data.count);
       })

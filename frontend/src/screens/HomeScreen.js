@@ -13,7 +13,7 @@ function HomeScreen() {
   const [totalBlogs, setTotalBlogs] = useState(0);
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState([]); // State to store the fetched blogs
-  const itemsPerPage = 5;
+  const [itemsPerPage, setitemsPerPage] = useState(1);
   useEffect(() => {
     fetchBlogs();
   }, [authToken, currentPage]);
@@ -31,6 +31,7 @@ function HomeScreen() {
       headers: { Authorization: `Bearer ${authToken}` },
     })
       .then((res) => {
+        setitemsPerPage(res.data.page_size);
         setBlogs(res.data.results);
         setTotalBlogs(res.data.count);
       })
