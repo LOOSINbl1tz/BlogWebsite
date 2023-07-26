@@ -2,9 +2,29 @@
 
 <h1>Setup</h1>
 <ul>
-  <li>First make virtual enviroment and install libs in requirements.txt</li>
-  <li>Then make a db using psql named <b>blogdb</b> and a user named <b>blogger</b></li>
-  <li>Now runserver and make those api calls using POSTMAN</li>
+  <li>First make virtual enviroment and install libs in requirements.txt.</li>
+  <li>Then make a db using psql named <b>blogdb</b> and a user named <b>blogger</b>.</li>
+  <li>Now runserver and make those api calls using POSTMAN.</li>
+  <li>If want to integrate front-end with the project then install Node.js and run the frontend server from the 'frontend' folder along with django server.</li>
+</ul>
+
+<h2>
+  Back-End Features:
+</h2>
+<ul>
+  <li>Django Rest Framework</li>
+  <li>JWT authentication</li>
+  <li>Custom pagination</li>
+</ul>
+
+<h2>
+  Front-End Features:
+</h2>
+<ul>
+  <li>React Framework</li>
+  <li>Redux Implementation</li>
+  <li>Proper UI</li>
+  <li>Proper session management</li>
 </ul>
 
 API calls: http://localhost:8000/<br>
@@ -41,13 +61,6 @@ API calls: http://localhost:8000/<br>
         <td align="Center">Title, Author ID, Content</td>
       </tr>
       <tr>
-        <td>/blog/getblog/</td>
-        <td>Only logged-in users</td>
-        <td>GET, DELETE</td>
-        <td>All the blogs posted by the logged-in User</td>
-        <td align="Center">-</td>
-      </tr>
-      <tr>
         <td>/login/refresh/</td>
         <td>Only logged-in users</td>
         <td>GET</td>
@@ -60,6 +73,27 @@ API calls: http://localhost:8000/<br>
         <td>POST</td>
         <td>User ID</td>
         <td align="Center">JWT token as header</td>
+      </tr>
+      <tr>
+        <td>/blog/getblog/</td>
+        <td>Only logged-in users</td>
+        <td>GET</td>
+        <td>All the blogs Posted on the server.</td>
+        <td align="Center">-</td>
+      </tr>
+      <tr>
+        <td>/blog/getuserblogs</td>
+        <td>Only logged-in users</td>
+        <td>GET</td>
+        <td>Return only those blogs which are posted by the user.</td>
+        <td align="Center">user_id</td>
+      </tr>
+      <tr>
+        <td>/blog/delete/</td>
+        <td>Only Loggin-in users</td>
+        <td>DELETE</td>
+        <td>Deletes blogs posted by the user.</td>
+        <td align="Center">blog_id</td>
       </tr>
     </tbody>
   </table>
@@ -82,7 +116,6 @@ Now by default SessionAuthentication is disabled so to access these API <b><h2>P
   <li>The blog saving API uses author_id which is mapped to user_id in other words the value for user_id is equivalent to author_id.</li>
 </ul>
 
-<h1>Update!!!!!!!!</h1>
-<ul>
-  <li>Added pagination and logout feature.</li>
-</ul>
+<h1>Project Contributors:-</h1>
+<li>Front-End by <a link href="https://github.com/Put-to">Put-to</a></li>
+<li>Back-End by <a link href="https://github.com/LOOSINbl1tz">LOOSINbl1tz</a></li>
